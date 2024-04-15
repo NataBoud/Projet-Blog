@@ -1,0 +1,70 @@
+/* Styles spécifiques pour Article */
+.article {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6rem;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: aliceblue;
+    border-radius: 0.3rem;
+    box-shadow: 0.1rem 0.2rem 0.2rem rgba(30, 30, 30, 0.2);
+    padding: 0  1rem 4rem 1rem;
+    margin-top: 4rem;
+    width: 90vw;
+
+    >  p {
+        padding: 0.5rem 1rem;
+        color: hsl(0, 0%, 40%);
+        font-size: 1rem;
+    }
+    > span {
+        color: hsl(0, 0%, 60%);
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+    .button-group {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 2.5rem;
+    }
+
+    #btn-edit {
+        padding: 0.4rem 1rem;
+        background-color: aliceblue;
+        border: 1px solid #4CAF50;
+        color: #4CAF50;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 0.8rem;
+        box-shadow: 0.1rem 0.2rem 0.2rem rgba(30, 30, 30, 0);
+        margin-right: 1rem;
+    }
+
+    #btn-edit:hover {
+        background-color: #4CAF50;
+        color: hsl(0, 0%, 100%);
+    }
+
+    /* Correction pour .btn-delete */
+    #btn-delete {
+        padding: 0.4rem 1rem;
+        background-color: aliceblue;
+        border: 1px solid #d33144;
+        color: #d33144;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-size: 0.8rem;
+        box-shadow: 0.1rem 0.2rem 0.2rem rgba(30, 30, 30, 0);
+        text-decoration: none;
+    }
+
+    #btn-delete:hover {
+        background-color: #d33144;
+        color: hsl(0, 0%, 100%);
+    }
+}

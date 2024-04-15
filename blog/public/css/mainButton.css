@@ -1,0 +1,17 @@
+.btn-primary {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0.1rem 0.2rem 0.2rem rgba(30, 30, 30, 0.1);
+    font-size: 1.1rem;
+}
+.btn-primary:hover {
+    background-color: #45a049;
+}
+

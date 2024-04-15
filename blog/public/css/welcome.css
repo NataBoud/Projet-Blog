@@ -1,0 +1,91 @@
+.cards.no-articles {
+    grid-template-columns: none; /* "initial"  */
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+    grid-gap: 1rem;
+    justify-content: center;
+    margin: 2rem 10rem 6rem 10rem;
+
+
+    .card {
+        background-color: aliceblue;
+        border-radius: 0.5rem;
+        color: hsl(0, 2%, 8%);
+        box-shadow: 0.1rem 0.2rem 0.2rem rgba(30, 30, 30, 0.2);
+        cursor: pointer;
+        align-items: center;
+        margin: 0;
+        display: grid;
+        grid-template-rows: max-content auto max-content;
+        width: 100%;
+
+            > h3 {
+                font-size: 1.35rem;
+                text-align: center;
+                display: grid;
+                font-weight: 600;
+                color: hsl(0, 0%, 36%);
+                margin: .7rem 1rem 0 1rem;
+            }
+            > p {
+                padding: 0.5rem 1rem;
+                color: hsl(0, 0%, 40%);
+                font-size: 0.9rem;
+
+            }
+            > .desc {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-bottom: 1rem; /* Espacement entre les éléments */
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3; /* Nombre de lignes à afficher */
+                max-height: 4.5rem; /* Augmentation de la hauteur pour éviter la coupure */
+                position: relative; /* Pour le pseudo-élément */
+                color: hsl(0, 0%, 50%);
+            }
+            > .desc::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 1.5rem; /* Largeur de l'espace pour les points de suspension */
+                height: 1.5rem; /* Hauteur de l'espace pour les points de suspension */
+                background: linear-gradient(to right, aliceblue, transparent); /* Dégradé pour les points de suspension */
+            }
+            > span {
+                color: hsl(0, 0%, 60%);
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+            > .button {
+                margin-bottom: 1rem;
+                padding: 0.3rem 0.9rem;
+                justify-self: end;
+                align-self: end;
+                margin-top: auto;
+
+                > #btn-article {
+                    background-color: aliceblue;
+                    border: 1px solid #4CAF50;
+                    padding: 0.4rem 1rem;
+                    color: #4CAF50;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                    font-size: 0.8rem;
+                    box-shadow: 0.1rem 0.2rem 0.2rem rgba(30, 30, 30, 0);
+                    text-decoration: none;
+                }
+                #btn-article:hover {
+                    background-color: #4CAF50;
+                    color: hsl(0, 0%, 100%);
+                }
+            }
+
+
+
+    }
+}

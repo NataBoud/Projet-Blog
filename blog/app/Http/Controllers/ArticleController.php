@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -11,7 +12,6 @@ class ArticleController extends Controller
     {
         return view('article.create');
     }
-
 
     // CREATE
     public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
@@ -22,7 +22,7 @@ class ArticleController extends Controller
             'author' => 'required|string|min:2|max:255'
         ]);
 
-        Article::create($request->all());
+        Article::create([...$request->all(), 'user_id' => Auth::id()]);
 
         return redirect('/accueil');
     }
@@ -30,7 +30,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
-        return view('welcome')->with('articles', $articles);
+        return view('welcome', ['articles' => $articles]);
     }
 
     // READE ARTICLE PAR ID

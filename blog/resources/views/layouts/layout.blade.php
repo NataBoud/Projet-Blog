@@ -17,8 +17,8 @@
 <header>
     <nav>
         <ul>
-            @foreach(['Accueil', 'Contact'] as $page)
-                <li><a href="{{ url(strtolower($page)) }}">{{ $page }}</a></li>
+            @foreach(["accueil", "contact", "enregistrer", "se connecter" ] as $page)
+                <li><a href="{{ route(strtolower($page)) }}">{{ $page }}</a></li>
             @endforeach
         </ul>
     </nav>

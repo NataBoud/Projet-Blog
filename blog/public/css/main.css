@@ -8,7 +8,7 @@
 html, body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    background-image: linear-gradient(to bottom right, hsl(0, 0%, 85%), #78b77b);
+    background-image: linear-gradient(to bottom right, hsl(0, 0%, 96%), rgba(199, 207, 227, 0.6));
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-attachment: fixed; /* Fixe le fond pour qu'il reste en place pendant le défilement */
@@ -18,21 +18,21 @@ html, body {
 
 h1 {
     margin: 3.5rem;
-    color: #388a3c;
+    color: rgba(31, 41, 55, 0.67);
     text-align: center;
     font-size: 2.5rem;
 }
 h2 {
     margin-top: 3.5rem;
     margin-bottom: 1.8rem;
-    color: #388a3c;
+    color: rgb(31 41 55);
     text-align: center;
     font-size: 2.2rem;
 }
 
 h3 {
     margin: 2rem;
-    color: hsl(0, 0%, 40%);
+    color: rgb(115, 129, 148);
     text-align: center;
     font-weight: 500;
 }
@@ -44,33 +44,44 @@ body {
 /* Style de la barre de navigation */
 nav ul {
     list-style-type: none;
-    background-color: #388a3c;
+    background-color: rgb(139, 153, 175);
     text-align: center;
     height: 4rem;
     line-height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 nav ul li {
     display: inline-block;
-    margin-right: 20px;
+}
+
+nav ul li:nth-child(2) {
+    margin-right: auto; /* Pousse "accueil" et "contact" à droite */
+}
+
+nav ul li:nth-child(3)
+{
+    margin-left: auto; /* Pousse "se connecter" et "s'enregistrer" à gauche */
 }
 
 nav ul li a {
     text-decoration: none;
     color: #fff;
     transition: background-color 0.3s;
-    padding: 0.2rem;
+    padding: 0.6rem;
 }
 
 nav ul li a:hover {
-    background-color: #4CAF50;
-    padding: 0.2rem;
-    transition: background-color 0.3s;
+
 }
+
+
 
 /* Style du footer */
 footer {
-    background-color: #388a3c;
+    background-color: rgb(139, 153, 175);
     color: hsl(0, 0%, 80%);
     text-align: center;
     padding: 10px 0;

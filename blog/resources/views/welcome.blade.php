@@ -6,6 +6,8 @@
 
 
         <h1>Bienvenue sur le Blog</h1>
+
+@auth
         <a href="{{ route('create') }}" style="text-decoration: none;">
             <button class="btn-primary">Créer un article</button>
         </a>
@@ -30,4 +32,7 @@
                     @endforeach
                 @endif
             </div>
+
+@endauth
+
 @endsection

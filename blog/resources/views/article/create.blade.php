@@ -4,11 +4,11 @@
     <link rel="stylesheet" href='../css/createFormulaire.css'>
 
     <h2>Création d'article</h2>
-    <div class="container">
-        <div class="form">
-            <form method="POST" action="{{ route('store') }}">
-                @csrf
-
+    <div class="article">
+        <div class="container">
+            <div class="form">
+                <form method="POST" action="{{ route('store') }}">
+                    @csrf
                     <div class="form-group">
                         <label for="title">Titre de l'article</label>
                         <input id="title" type="text" name="title" class="form-control">
@@ -22,8 +22,8 @@
                     <div class="button-group">
                         <button type="submit" id="form-button">Publier</button>
                     </div>
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

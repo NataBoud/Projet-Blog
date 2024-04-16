@@ -1,3 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Reset des styles par défaut */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-image: linear-gradient(to bottom right, hsl(0, 0%, 96%), rgba(199, 207, 227, 0.6));
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Fixe le fond pour qu'il reste en place pendant le défilement */
+    display: flex;
+    flex-direction: column; /* Permet au contenu de s'étendre verticalement */
+}
+
+h1 {
+    margin: 3.5rem;
+    color: rgba(31, 41, 55, 0.67);
+    text-align: center;
+    font-size: 2.5rem;
+}
+h2 {
+    margin-top: 3.5rem;
+    margin-bottom: 1.8rem;
+    color: rgb(31 41 55);
+    text-align: center;
+    font-size: 2.2rem;
+}
+
+h3 {
+    margin: 2rem;
+    color: rgb(115, 129, 148);
+    text-align: center;
+    font-weight: 500;
+}
+
+body {
+    flex: 1; /* Permet au contenu de s'étendre pour remplir l'espace restant */
+}
+
+/* Style de la barre de navigation */
+nav ul {
+    list-style-type: none;
+    background-color: rgb(139, 153, 175);
+    text-align: center;
+    height: 4rem;
+    line-height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li:nth-child(2) {
+    margin-right: auto; /* Pousse "accueil" et "contact" à droite */
+}
+
+nav ul li:nth-child(3)
+{
+    margin-left: auto; /* Pousse "se connecter" et "s'enregistrer" à gauche */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s;
+    padding: 0.6rem;
+}
+
+nav ul li a:hover {
+
+}
+
+
+
+/* Style du footer */
+footer {
+    background-color: rgb(139, 153, 175);
+    color: hsl(0, 0%, 80%);
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto; /* Positionne le footer en bas de la page */
+}

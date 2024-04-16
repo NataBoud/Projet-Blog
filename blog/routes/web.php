@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,12 @@ Route::put('/article/{id}', [ArticleController::class, 'update'])->name('update'
 
 // DELETE
 Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->name('destroy');
+
+
+
+Route::name('comments.')->prefix("comments")->group(function () {
+    Route::post("/{articleId}", [CommentController::class, 'store'])->name('store')->middleware('auth');
+});
 
 
 require __DIR__.'/auth.php';

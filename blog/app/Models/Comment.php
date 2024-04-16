@@ -10,7 +10,7 @@ class Comment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["content"];
+    protected $fillable = ["content", "user_id", "article_id"];
 
     // On définit la relation pour pouvoir récupérer l'article sur lequel le commentaire a été posté
     // Eloquent nous fournit des traits pour lier nos modèles

@@ -22,6 +22,9 @@
                             <p>Auteur: {{$article->user->name}}</p>
                             <p class="desc">{{ $article->description }}</p>
                             <span>Date de création: {{ $article->created_at }}</span>
+                            <p>
+                            Comments: {{count($article->comments)}}
+                            </p>
                             <div class="button">
                                 <a id="btn-article" href="{{ route('show', $article->id) }}">
                                    Lire

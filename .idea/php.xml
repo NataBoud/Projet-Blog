@@ -142,6 +142,7 @@
       <path value="$PROJECT_DIR$/blog/vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/blog/vendor/psr/log" />
       <path value="$PROJECT_DIR$/blog/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/blog/vendor/laravel/breeze" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

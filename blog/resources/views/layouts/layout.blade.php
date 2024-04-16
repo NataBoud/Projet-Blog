@@ -17,9 +17,26 @@
 <header>
     <nav>
         <ul>
-            @foreach(["accueil", "contact", "enregistrer", "se connecter" ] as $page)
-                <li><a href="{{ route(strtolower($page)) }}">{{ $page }}</a></li>
-            @endforeach
+            <li><a href="{{route('accueil')}}">Accueil</a></li>
+            <li><a href="{{route('contact')}}">Contacter</a></li>
+            @auth
+                <li><a href="{{route('create')}}">Créer article</a></li>
+            @endauth
+
+            @guest
+                <li><a href="{{route('login')}}">Se connecter</a></li>
+                <li><a href="{{route('register')}}">S'enregistrer</a></li>
+            @endguest
+
+            @auth
+                <li>{{auth()->user()->name}}</li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button>Déconnexion</button>
+                    </form>
+                </li>
+            @endauth
         </ul>
     </nav>
 

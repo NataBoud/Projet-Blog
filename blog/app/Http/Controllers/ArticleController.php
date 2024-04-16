@@ -16,13 +16,13 @@ class ArticleController extends Controller
     // CREATE
     public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
+//        dd($request);
         $request->validate([
             'title' => 'required|string|min:2|max:255',
             'description' => 'required|string|',
-            'author' => 'required|string|min:2|max:255'
         ]);
 
-        Article::create([...$request->all(), 'user_id' => Auth::id()]);
+        Article::create([...$request->all(), 'user_id' => Auth::id(), 'author' => Auth::user()->name]);
 
         return redirect('/accueil');
     }
@@ -30,7 +30,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
-        return view('welcome', ['articles' => $articles]);
+        return view('accueil', ['articles' => $articles]);
     }
 
     // READE ARTICLE PAR ID

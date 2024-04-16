@@ -19,7 +19,7 @@
                     @foreach($articles as $article)
                         <div class="card">
                             <h3>{{ $article->title }}</h3>
-                            <p>Auteur: {{ $article->author }}</p>
+                            <p>Auteur: {{$article->user->name}}</p>
                             <p class="desc">{{ $article->description }}</p>
                             <span>Date de création: {{ $article->created_at }}</span>
                             <div class="button">

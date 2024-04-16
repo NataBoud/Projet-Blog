@@ -6,17 +6,12 @@
     <h2>Création d'article</h2>
     <div class="container">
         <div class="form">
-            <form method="POST" action="{{ route('create') }}">
+            <form method="POST" action="{{ route('store') }}">
                 @csrf
 
                     <div class="form-group">
                         <label for="title">Titre de l'article</label>
                         <input id="title" type="text" name="title" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="author">Auteur</label>
-                        <input id="author" type="text" name="author" class="form-control">
                     </div>
 
                     <div class="form-group">

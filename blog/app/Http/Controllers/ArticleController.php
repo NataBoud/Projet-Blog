@@ -27,7 +27,7 @@ class ArticleController extends Controller
         return redirect('/accueil');
     }
 
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $articles = Article::all();
         return view('accueil', ['articles' => $articles]);

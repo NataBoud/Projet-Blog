@@ -24,6 +24,20 @@
         font-size: 0.85rem;
         padding: 0.5rem 1rem;
     }
+    > form {
+        margin: 0.5rem 1rem;
+    }
+    > form textarea {
+        padding: 0.5rem;
+        border: 1px solid hsl(0, 0%, 70%);
+        border-radius: 0.3rem;
+        width: 100%;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        resize: vertical;
+
+    }
+
     .button-group {
         width: 100%;
         display: flex;

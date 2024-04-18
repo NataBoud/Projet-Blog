@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\UploadFile;
 
 return new class extends Migration
 {
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->string('title', 45);
             $table->text('description');
             $table->string('author', 100);
+            $table->foreignIdFor(UploadFile::class)->constrained()->onDelete('cascade');
             $table->timestamps(); // Colonnes created_at et updated_at automatiquement gérées par Laravel
         });
     }

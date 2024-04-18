@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\UploadedFile;
+use App\Models\UploadFile;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,40 +20,43 @@ class ArticleController extends Controller
     // CREATE
     public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
-//        dd($request);
         $validated = $request->validate([
             'title' => 'required|string|min:2|max:255',
             'description' => 'required|string',
             'file' => 'nullable|file|mimes:jpeg,jpg,png|max:2048'
         ]);
 
-        $article = Article::create([
-            ...$request->except('file'),
+        $articleData = [
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'author' => Auth::user()->name,
             'user_id' => Auth::id(),
-            'author' => Auth::user()->name
-        ]);
+        ];
 
-        $file = $validated['file'];
-        $fileName = time() . '.' . $file->getClientOriginalExtension();
-        $originalName = $file->getClientOriginalName();
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '.' . $file->getClientOriginalExtension();
+            $originalName = $file->getClientOriginalName();
 
-        $filePath = Storage::putFile('public/uploads', $file);
+            $filePath = Storage::putFileAs('public/uploads', $file, $fileName);
 
-        // Ajout des metadata du fichier en base de données
-        UploadedFile::create([
-            'filename' => $fileName,
-            'original_filename' => $originalName,
-            'file_path' => $filePath,
-            'article_id' => $article->id
-        ]);
+            $uploadFile = UploadFile::create([
+                'filename' => $fileName,
+                'original_filename' => $originalName,
+                'file_path' => $filePath,
+            ]);
+
+            $articleData['upload_file_id'] = $uploadFile->id;
+        }
+
+        Article::create($articleData);
 
         return redirect('/accueil');
-    }
+   }
 
     public function index(): View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $articles = Article::with('file')->get();
-        dd($articles);
+        $articles = Article::with('uploadFile')->get();
         return view('accueil', ['articles' => $articles]);
     }
 
@@ -81,20 +84,18 @@ class ArticleController extends Controller
 
     // DELETE ARTICLE PAR ID
 
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $article = Article::find($id);
 
-        if (!$article) {
-            return redirect('/accueil')->with('error', 'Article non trouvé');
-        }
-
         $article->delete();
+//        $uploadFile = UploadFile::findOrFail($id);
+//        $uploadFile->delete();
 
         return redirect('/accueil')->with('success', 'Article supprimé avec succès');
     }
 
-    public function edit($id)
+    public function edit($id): View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $article = Article::find($id);
         return view('article.edit')->with('article', $article);

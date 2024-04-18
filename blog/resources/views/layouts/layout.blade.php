@@ -31,7 +31,7 @@
             @endguest
 
             @auth
-                <li>{{auth()->user()->name}}</li>
+                <li><a href="{{route('profile.edit')}}">{{auth()->user()->name}}</a></li>
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf

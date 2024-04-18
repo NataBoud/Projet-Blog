@@ -6,8 +6,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('accueil');
-})->name('accueil');
+    redirect()->route('accueil');
+});
 
 Route::get('/contact', function () {
     return view('contact');
@@ -51,6 +51,8 @@ Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->name('des
 Route::name('comments.')->prefix("comments")->group(function () {
     Route::post("/{articleId}", [CommentController::class, 'store'])->name('store')->middleware('auth');
 });
+
+
 
 
 require __DIR__.'/auth.php';

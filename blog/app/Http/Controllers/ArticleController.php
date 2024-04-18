@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\UploadedFile;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|View|\Illuminate\Contracts\Foundation\Application
     {
         return view('article.create');
     }
@@ -17,25 +21,45 @@ class ArticleController extends Controller
     public function store(Request $request): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
 //        dd($request);
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|min:2|max:255',
-            'description' => 'required|string|',
+            'description' => 'required|string',
+            'file' => 'nullable|file|mimes:jpeg,jpg,png|max:2048'
         ]);
 
-        Article::create([...$request->all(), 'user_id' => Auth::id(), 'author' => Auth::user()->name]);
+        $article = Article::create([
+            ...$request->except('file'),
+            'user_id' => Auth::id(),
+            'author' => Auth::user()->name
+        ]);
+
+        $file = $validated['file'];
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $originalName = $file->getClientOriginalName();
+
+        $filePath = Storage::putFile('public/uploads', $file);
+
+        // Ajout des metadata du fichier en base de données
+        UploadedFile::create([
+            'filename' => $fileName,
+            'original_filename' => $originalName,
+            'file_path' => $filePath,
+            'article_id' => $article->id
+        ]);
 
         return redirect('/accueil');
     }
 
-    public function index(): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function index(): View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $articles = Article::all();
+        $articles = Article::with('file')->get();
+        dd($articles);
         return view('accueil', ['articles' => $articles]);
     }
 
     // READE ARTICLE PAR ID
 
-    public function show($id): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function show($id): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $article = Article::find($id);
         return view('article.show')->with('article', $article);
@@ -47,7 +71,6 @@ class ArticleController extends Controller
         $request->validate([
             'title' => 'required|string|min:2|max:255',
             'description' => 'required|string',
-            'author' => 'required|string|min:2|max:255'
         ]);
 
         $article = Article::find($id);

@@ -7,7 +7,7 @@
     <div class="article">
         <div class="container">
             <div class="form">
-                <form method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('articles.store') }}" enctype="multipart/form-data">
                 @csrf
                     <div class="form-group">
                         <label for="title">Titre de l'article</label>

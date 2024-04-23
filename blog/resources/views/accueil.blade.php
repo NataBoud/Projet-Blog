@@ -7,7 +7,7 @@
     <h1>Bienvenue sur le Blog</h1>
 
     @auth
-        <a href="{{ route('create') }}" style="text-decoration: none;">
+        <a href="{{ route('articles.create') }}" style="text-decoration: none;">
             <button class="btn-primary">Créer un article</button>
         </a>
 
@@ -27,7 +27,7 @@
                         <span>Date de création: {{ $article->created_at }}</span>
                         <p>Comments: {{ count($article->comments) }}</p>
                         <div class="button">
-                            <a id="btn-article" href="{{ route('show', $article->id) }}">Lire</a>
+                            <a id="btn-article" href="{{ route('articles.show', $article->id) }}">Lire</a>
                         </div>
                     </div>
                 @endforeach

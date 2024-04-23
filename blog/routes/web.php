@@ -5,15 +5,6 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    redirect()->route('accueil');
-});
-
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
-
-
 // Route publique se connecter et s'enregistrer mdp 12345@azert
 
 // BREEZE
@@ -27,26 +18,28 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// CREATE
-Route::get('/create', function () {
-    return view('article.create');
-});
-
-Route::get('/create', [ArticleController::class, 'create'])->name('create');
-Route::post('/create', [ArticleController::class, 'store'])->name('store');
-
-//READ
-Route::get('/accueil', [ArticleController::class, 'index'])->name('accueil');
-Route::get('/article/{article}', [ArticleController::class, 'show'])->name('show');
-
-// UPDATE
-Route::get('/article/{id}/edit', [ArticleController::class, 'edit'])->name('edit');
-Route::put('/article/{id}', [ArticleController::class, 'update'])->name('update');
-
-// DELETE
-Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->name('destroy');
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 
+Route::name('articles.')
+    ->prefix("articles")
+    ->controller(ArticleController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/article/{article}')->name('show');
+        Route::get('/article/{id}/edit', 'edit')->name('edit');
+        Route::put('/article/{id}', 'update')->name('update');
+        Route::delete('/article/{id}', 'destroy')->name('destroy');
+
+    });
+
+Route::get('/', function () {
+    return redirect()->route('articles.index');
+})->name('accueil');
 
 Route::name('comments.')->prefix("comments")->group(function () {
     Route::post("/{articleId}", [CommentController::class, 'store'])->name('store')->middleware('auth');

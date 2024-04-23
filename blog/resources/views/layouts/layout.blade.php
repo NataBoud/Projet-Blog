@@ -22,7 +22,7 @@
             <li><a href="{{route('accueil')}}">Accueil</a></li>
             <li><a href="{{route('contact')}}">Contacter</a></li>
             @auth
-                <li><a href="{{route('create')}}">Créer article</a></li>
+                <li><a href="{{route('articles.create')}}">Créer article</a></li>
             @endauth
 
             @guest

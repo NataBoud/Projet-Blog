@@ -19,7 +19,11 @@
                         @csrf
                         <label for="content"></label>
                         <textarea class="form-control" id="content" rows="5" required name="content" placeholder="Laisser un commentaire..."></textarea>
+
                         <div class="button-group">
+                            <a href="{{ route('accueil') }}">
+                                <button type="button" id="btn-cancel">Retour</button>
+                            </a>
                             <button type="submit" id="btn-green">Publier</button>
                         </div>
                     </form>

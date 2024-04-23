@@ -51,7 +51,7 @@ class ArticleController extends Controller
 
         Article::create($articleData);
 
-        return redirect('/accueil');
+        return redirect('/');
    }
 
     public function index(): View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
@@ -69,7 +69,7 @@ class ArticleController extends Controller
     }
 
     // UPDATE ARTICLE PAR ID
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $request->validate([
             'title' => 'required|string|min:2|max:255',
@@ -94,7 +94,7 @@ class ArticleController extends Controller
         $article->delete();
         $file->delete();
 
-        return redirect('/accueil')->with('success', 'Article supprimé avec succès');
+        return redirect('/')->with('success', 'Article supprimé avec succès');
     }
 
     public function edit($id): View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application

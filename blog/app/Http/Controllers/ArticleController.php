@@ -86,11 +86,13 @@ class ArticleController extends Controller
 
     public function destroy($id): \Illuminate\Foundation\Application|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
+        $file = UploadFile::findOrFail($article->upload_file_id);
+
+        Storage::delete($file->file_path);
 
         $article->delete();
-//        $uploadFile = UploadFile::findOrFail($id);
-//        $uploadFile->delete();
+        $file->delete();
 
         return redirect('/accueil')->with('success', 'Article supprimé avec succès');
     }

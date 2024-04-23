@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title', 45);
             $table->text('description');
             $table->string('author', 100);
-            $table->foreignIdFor(UploadFile::class)->constrained()->onDelete('cascade');
+//            $table->foreignIdFor(UploadFile::class)->constrained();
             $table->timestamps(); // Colonnes created_at et updated_at automatiquement gérées par Laravel
         });
     }
